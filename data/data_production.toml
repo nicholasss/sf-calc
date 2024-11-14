@@ -1,0 +1,19 @@
+[machines]
+
+# assuming all mk1 and non-overclocked
+# machines do not have an in/out max, thats for recipes and belts
+
+# conv_in/conv_out here refers to the number of conveyor slots
+# power is in mw
+
+[[machines.smelter]]
+name = "Smelter"
+power_mw = 4
+conn_in = 1
+conn_out = 1
+
+[[machines.assembler]]
+name = "Assembler"
+power_mw = 15
+conn_in = 2
+conn_out = 1

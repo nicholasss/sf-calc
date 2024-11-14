@@ -1,0 +1,17 @@
+# recipes for the various ingredients
+
+[recipes]
+
+# all in/out is per minute
+
+[[recipes.iron]]
+name = "Iron Ingot"
+machine = "Smelter"
+in = 30
+out = 30
+
+[[recipes.copper]]
+name = "Copper Ingot"
+machine = "Smelter"
+in = 30
+out = 30
