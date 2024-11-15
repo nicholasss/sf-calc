@@ -1,0 +1,20 @@
+{
+	"machines": [
+		{
+			"smelter": {
+				"name": "Smelter",
+				"power_mw": 4,
+				"conn_in": 1,
+				"conn_out": 1
+			}
+		},
+		{
+			"assembler": {
+				"name": "Assembler",
+				"power_mw": 15,
+				"conn_in": 2,
+				"conn_out": 1
+			}
+		}
+	]
+}

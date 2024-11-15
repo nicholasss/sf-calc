@@ -1,0 +1,20 @@
+{
+	"recipes": [
+		{
+			"iron_ingot": {
+				"name": "Iron Ingot",
+				"machine": "Smelter",
+				"in": 30,
+				"out": 30
+			}
+		},
+		{
+			"copper_ingot": {
+				"name": "Copper Ingot",
+				"machine": "Smelter",
+				"in": 30,
+				"out": 30
+			}
+		}
+	]
+}
