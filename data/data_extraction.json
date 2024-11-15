@@ -1,24 +1,20 @@
 {
-	"extraction": [
-		{
-			"miner": {
-				"name": "Miner MK1",
-				"power_mw": 6,
-				"conn_in": 0,
-				"conn_out": 1,
-				"in": 0,
-				"out": 60
-			}
+	"extraction": {
+		"miner": {
+			"name": "Miner MK1",
+			"power_mw": 6,
+			"conn_in": 0,
+			"conn_out": 1,
+			"in": 0,
+			"out": 60
 		},
-		{
-			"water": {
-				"name": "Water Extractor",
-				"power_mw": 20,
-				"conn_in": 0,
-				"conn_out": 1,
-				"in": 0,
-				"out": 120
-			}
+		"water": {
+			"name": "Water Extractor",
+			"power_mw": 20,
+			"conn_in": 0,
+			"conn_out": 1,
+			"in": 0,
+			"out": 120
 		}
-	]
+	}
 }

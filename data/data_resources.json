@@ -1,44 +1,34 @@
 {
-	"resources": [
-		{
-			"iron": {
-				"name": "Iron Ore",
-				"machine": "miner",
-				"in": 0,
-				"out": 60
-			}
+	"resources": {
+		"iron": {
+			"name": "Iron Ore",
+			"machine": "miner",
+			"in": 0,
+			"out": 60
 		},
-		{
-			"copper": {
-				"name": "Copper Ore",
-				"machine": "miner",
-				"in": 0,
-				"out": 60
-			}
+		"copper": {
+			"name": "Copper Ore",
+			"machine": "miner",
+			"in": 0,
+			"out": 60
 		},
-		{
-			"limestone": {
-				"name": "Limestone Ore",
-				"machine": "miner",
-				"in": 0,
-				"out": 60
-			}
+		"limestone": {
+			"name": "Limestone Ore",
+			"machine": "miner",
+			"in": 0,
+			"out": 60
 		},
-		{
-			"coal": {
-				"name": "Coal Ore",
-				"machine": "miner",
-				"in": 0,
-				"out": 60
-			}
+		"coal": {
+			"name": "Coal Ore",
+			"machine": "miner",
+			"in": 0,
+			"out": 60
 		},
-		{
-			"water": {
-				"name": "Water",
-				"machine": "Water Extractor",
-				"in": 0,
-				"out": 120
-			}
+		"water": {
+			"name": "Water",
+			"machine": "Water Extractor",
+			"in": 0,
+			"out": 120
 		}
-	]
+	}
 }
