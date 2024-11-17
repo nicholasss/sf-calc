@@ -39,13 +39,13 @@ class BookData():
             # print(f"New book to sort: {list(book.keys())[0]}")
 
             if "extraction" in book:
-                self.extraction = book
+                self.extraction = book["extraction"]
             elif "recipes" in book:
-                self.recipes = book
+                self.recipes = book["recipes"]
             elif "machines" in book:
-                self.machines = book
+                self.machines = book["machines"]
             elif "resources" in book:
-                self.resources = book
+                self.resources = book["resources"]
             else:
                 print("""Error, additional dictionary loaded from file.
 No dict object ready.""")
@@ -62,14 +62,17 @@ No dict object ready.""")
                     dicts.append(json.load(data_file))
 
             except FileNotFoundError as e:
-                print("File was not found, please check path:", path, e)
+                print("File was not found, please check path:",
+                      path, e)
             except IOError as e:
-                print("Error occured while working with file at path:", path, e)
+                print("Error occured while working with file at path:",
+                      path, e)
 
         return dicts
 
     def check_books(self) -> bool:
-        for book in [self.extraction, self.recipes, self.resources, self.machines]:
+        for book in [self.extraction, self.recipes,
+                     self.resources, self.machines]:
             if book == {}:
                 print(f"The following book is empty!\n{book}")
                 return False

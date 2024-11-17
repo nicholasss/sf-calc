@@ -5,10 +5,7 @@
 import sys
 import argparse
 
-from data_initializer import (
-    DATA_DIR, __ls_dir_abs, __load_json,
-    machines, recipes, resources, extraction
-)
+from data_initializer import BookData
 
 # setup parser object
 parser = argparse.ArgumentParser(description="Satisfactory Calculator CLI.")
@@ -26,6 +23,7 @@ parser.add_argument(
 parser.add_argument(
     "-l", "--list", help="list all possible recipes",
     nargs="?", const="all")
+# TODO: how to sort recipes for listing?
 
 # parsing args
 args = parser.parse_args()
@@ -37,19 +35,18 @@ def main():
 
     if argc <= 1:
         print("Not enough arguments provided.")
-        # TODO: help dialog
         return
 
-    # Loading recipes
-    data_files: list[str] = __ls_dir_abs(DATA_DIR)
-    data_dicts: list[dict] = __load_json(data_files)
-    # TODO: dictionaries are not organized at all, should have names
-    print(data_dicts)
+    bd = BookData()
 
     print(f"\nProvided arguments are: {args}")
 
-    if args.list is not None:
-        print("Listing recipes")
+    if args.list is not None and args.list == "all".lower():
+        print("Listing recipes.")
+        for book in bd.recipes:
+            name = bd.recipes[book]["name"]
+            machine = bd.recipes[book]["machine"]
+            print(f"-{name} ({machine})")
 
 
 if __name__ == "__main__":
