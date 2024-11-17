@@ -8,6 +8,7 @@ import json
 DATA_DIR: str = "../data/"
 
 
+# TODO: add a context argument for the "__name__" to be printed, or something.
 class BookData():
     def __init__(self):
         print(f"Data directory is set as: '{DATA_DIR}'")
