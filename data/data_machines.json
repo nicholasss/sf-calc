@@ -6,6 +6,12 @@
 			"conn_in": 1,
 			"conn_out": 1
 		},
+		"constructor": {
+			"name": "Constructor",
+			"power_mw": 4,
+			"conn_in": 1,
+			"conn_out": 1
+		},
 		"assembler": {
 			"name": "Assembler",
 			"power_mw": 15,

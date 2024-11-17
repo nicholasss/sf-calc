@@ -6,6 +6,18 @@
 			"in": 30,
 			"out": 30
 		},
+		"iron_rod": {
+			"name": "Iron Rod",
+			"machine": "Constructor",
+			"in": 15,
+			"out": 15
+		},
+		"screw": {
+			"name": "Screw",
+			"machine": "Constructor",
+			"in": 10,
+			"out": 40
+		},
 		"copper_ingot": {
 			"name": "Copper Ingot",
 			"machine": "Smelter",
