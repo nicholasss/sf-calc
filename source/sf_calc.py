@@ -43,10 +43,9 @@ def main():
     # NOTE: List Argument
     if args.list is not None and args.list == "all".lower():
         bd = BookData()  # BookData is only initialized if we need to list
-        for book in bd.recipes:
-            name = bd.recipes[book]["name"]
-            machine = bd.recipes[book]["machine"]
-            print("-{:15s} made in {:15s}".format(name, machine))
+        for recipe in bd.recipes:
+            machine = bd.recipes[recipe]["machine"]
+            print("-{:15s} made in {:15s}".format(recipe, machine))
 
     if args.count:
         try:
