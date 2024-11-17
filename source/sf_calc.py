@@ -6,6 +6,7 @@ import sys
 import argparse
 
 from data_initializer import BookData
+from search import Search
 
 # setup parser object
 parser = argparse.ArgumentParser(description="Satisfactory Calculator CLI.")
@@ -71,6 +72,11 @@ def main():
         else:
             s = ""
         print(f"Calculating recipe for {count} {recipe}{s}.")
+
+        recipe_request: dict = {recipe: count}
+
+        search = Search()
+        requirements = search.set_requirements(recipe_request)
 
 
 if __name__ == "__main__":
