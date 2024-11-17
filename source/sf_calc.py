@@ -52,22 +52,22 @@ def main():
 
     if args.count:
         try:
-            global count
             count = int(args.count)
         except ValueError:
             print("Please supply an integer for count. Setting as 1.")
             count = 1
-
-        if count <= 0:
-            print("Count provided needs to be at least 1. Setting as 1.")
-            count = 1
+    else:
+        count = 1
+    if count <= 0:
+        print("Count provided needs to be at least 1. Setting as 1.")
+        count = 1
 
     # NOTE: Recipe Argument
     if args.recipe:
         if len(args.recipe) > 1:
             print("Too many arguments provided for recipe.")
         recipe = args.recipe[0]
-        if count > 1:
+        if count > 1 and not None:
             s = "s"
         else:
             s = ""
