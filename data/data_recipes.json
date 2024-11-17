@@ -1,28 +1,40 @@
 {
 	"recipes": {
-		"iron_ingot": {
-			"name": "Iron Ingot",
+		"Iron Ingot": {
 			"machine": "Smelter",
-			"in": 30,
-			"out": 30
+			"in": {
+				"Iron Ore": 30
+			},
+			"out": {
+				"Iron Ingot": 30
+			}
 		},
-		"iron_rod": {
-			"name": "Iron Rod",
+		"Iron Rod": {
 			"machine": "Constructor",
-			"in": 15,
-			"out": 15
+			"in": {
+				"Iron Ore": 15
+			},
+			"out": {
+				"Iron Rod": 15
+			}
 		},
-		"screw": {
-			"name": "Screw",
+		"Screw": {
 			"machine": "Constructor",
-			"in": 10,
-			"out": 40
+			"in": {
+				"Iron Rod": 10
+			},
+			"out": {
+				"Screw": 40
+			}
 		},
-		"copper_ingot": {
-			"name": "Copper Ingot",
+		"Copper Ingot": {
 			"machine": "Smelter",
-			"in": 30,
-			"out": 30
+			"in": {
+				"Copper Ore": 30
+			},
+			"out": {
+				"Copper Ingot": 30
+			}
 		}
 	}
 }
