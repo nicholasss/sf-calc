@@ -38,13 +38,11 @@ def main():
         print("Not enough arguments provided.")
         return
 
-    bd = BookData()
-
     print(f"\nProvided arguments are: {args}")
 
     # NOTE: List Argument
     if args.list is not None and args.list == "all".lower():
-        print("Listing recipes.")
+        bd = BookData()  # BookData is only initialized if we need to list
         for book in bd.recipes:
             name = bd.recipes[book]["name"]
             machine = bd.recipes[book]["machine"]
