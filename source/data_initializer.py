@@ -33,6 +33,8 @@ def __load_json(paths: list[str]) -> list[dict]:
         finally:
             print("Read JSON from file at path:", path)
 
+    return dicts
+
 
 def main():
     print("Data directory is set as:", DATA_DIR)
