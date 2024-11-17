@@ -41,12 +41,20 @@ def main():
 
     print(f"\nProvided arguments are: {args}")
 
+    # NOTE: List Argument
     if args.list is not None and args.list == "all".lower():
         print("Listing recipes.")
         for book in bd.recipes:
             name = bd.recipes[book]["name"]
             machine = bd.recipes[book]["machine"]
-            print(f"-{name} ({machine})")
+            print("-{:15s} made in {:15s}".format(name, machine))
+
+    # NOTE: Recipe Argument
+    if args.recipe:
+        if len(args.recipe) > 1:
+            print("Too many arguments provided for recipe.")
+        recipe = args.recipe[0]
+        print(f"Calculating recipe for {recipe}.")
 
 
 if __name__ == "__main__":
