@@ -7,63 +7,77 @@ import json
 
 DATA_DIR: str = "../data/"
 
-extraction: dict = {}
-recipes: dict = {}
-machines: dict = {}
-resources: dict = {}
 
+class BookData():
+    def __init__(self):
+        print(f"Data directory is set as: '{DATA_DIR}'")
 
-def __ls_dir_abs(path: str) -> list[str]:
-    directory_files = os.listdir(path)
-    directory_files = list(
-        map(lambda x: os.path.join(DATA_DIR, x), directory_files))
-    directory_files = list(map(lambda x: os.path.abspath(x), directory_files))
-    return list(filter(lambda x: os.path.isfile(x), directory_files))
+        self.extraction: dict = {}
+        self.recipes: dict = {}
+        self.machines: dict = {}
+        self.resources: dict = {}
 
-
-def __load_into_dicts(dicts: list[dict]):
-    global extraction, recipes, machines, resources
-
-    for book in dicts:
-        if "extraction" in book:
-            extraction = book
-        elif "recipes" in book:
-            recipes = book
-        elif "machines" in book:
-            machines = book
-        elif "resources" in book:
-            resources = book
+        self.book_paths: list[str] = self.__ls_dir_abs(DATA_DIR)
+        self.__load_into_dicts(self.__json_load(self.book_paths))
+        if self.check_books():
+            print("Book Data is fully loaded and verified.")
         else:
-            print("""Error, additional dictionary loaded from file.
+            print("Problem found with books.")
+
+    def __ls_dir_abs(self, path: str) -> list[str]:
+        directory_files = os.listdir(path)
+        directory_files = list(
+            map(lambda x: os.path.join(DATA_DIR, x), directory_files))
+        directory_files = list(
+            map(lambda x: os.path.abspath(x), directory_files))
+        return list(
+            filter(lambda x: os.path.isfile(x), directory_files))
+
+    def __load_into_dicts(self, books: list[dict]):
+
+        for book in books:
+            # print(f"New book to sort: {list(book.keys())[0]}")
+
+            if "extraction" in book:
+                self.extraction = book
+            elif "recipes" in book:
+                self.recipes = book
+            elif "machines" in book:
+                self.machines = book
+            elif "resources" in book:
+                self.resources = book
+            else:
+                print("""Error, additional dictionary loaded from file.
 No dict object ready.""")
-            print(f"Please create dict object for: {list(book.keys())[0]}")
+                print(f"Please create dict object for: {list(book.keys())[0]}")
+                return
+        # print("All books were placed in the global variables")
 
+    def __json_load(self, paths: list[str]) -> list[dict]:
+        dicts: list[dict] = []
+        for path in paths:
 
-def __load_json(paths: list[str]) -> list[dict]:
-    dicts: list[dict] = []
-    for path in paths:
+            try:
+                with open(path, 'r') as data_file:
+                    dicts.append(json.load(data_file))
 
-        # check for file existing before opening
-        try:
-            with open(path, 'r') as data_file:
-                dicts.append(json.load(data_file))
-                # print(json.dumps(dicts[-1], indent=4))
+            except FileNotFoundError as e:
+                print("File was not found, please check path:", path, e)
+            except IOError as e:
+                print("Error occured while working with file at path:", path, e)
 
-        except FileNotFoundError as e:
-            print("File was not found, please check path:", path, e)
-        except IOError as e:
-            print("Error occured while working with file at path:", path, e)
-        finally:
-            # print("Read JSON from file at path:", path)
-            continue
+        return dicts
 
-    return dicts
+    def check_books(self) -> bool:
+        for book in [self.extraction, self.recipes, self.resources, self.machines]:
+            if book == {}:
+                print(f"The following book is empty!\n{book}")
+                return False
+        return True
 
 
 def main():
-    print("Data directory is set as:", DATA_DIR)
-    dicts = __load_json(__ls_dir_abs(DATA_DIR))  # list[dict]
-    __load_into_dicts(dicts)
+    _ = BookData()
 
 
 if __name__ == "__main__":
