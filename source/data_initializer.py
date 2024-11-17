@@ -3,7 +3,6 @@
 
 import os
 import json
-from pathlib import Path
 
 
 DATA_DIR = "../data/"
@@ -11,24 +10,33 @@ DATA_DIR = "../data/"
 
 def __ls_dir(path: str) -> list[str]:
     directory_files = os.listdir(path)
-    # is putting /source/ instead of /data/ into the paths
+    directory_files = list(
+        map(lambda x: os.path.join(DATA_DIR, x), directory_files))
     directory_files = list(map(lambda x: os.path.abspath(x), directory_files))
-    return list(filter(lambda x: not os.path.isfile(x), directory_files))
-    # have to reverse, as resolving as true means they are removed
+    return list(filter(lambda x: os.path.isfile(x), directory_files))
 
 
-def load_json(paths: list[str]) -> list[dict]:
+def __load_json(paths: list[str]) -> list[dict]:
     dicts: list[dict] = []
     for path in paths:
-        with open(path, 'r') as data_file:
-            dicts.append(json.loads(data_file))
-        print(dicts[-1], indent=4)
+
+        # check for file existing before opening
+        try:
+            with open(path, 'r') as data_file:
+                dicts.append(json.load(data_file))
+                # print(json.dumps(dicts[-1], indent=4))
+
+        except FileNotFoundError as e:
+            print("File was not found, please check path:", path, e)
+        except IOError as e:
+            print("Error occured while working with file at path:", path, e)
+        finally:
+            print("Read JSON from file at path:", path)
 
 
 def main():
     print("Data directory is set as:", DATA_DIR)
-    print("Files listed are:", __ls_dir(DATA_DIR))
-    data_list = load_json(__ls_dir(DATA_DIR))
+    _ = __load_json(__ls_dir(DATA_DIR))  # list[dict]
 
 
 if __name__ == "__main__":
