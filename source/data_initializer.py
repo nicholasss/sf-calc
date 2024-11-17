@@ -5,15 +5,38 @@ import os
 import json
 
 
-DATA_DIR = "../data/"
+DATA_DIR: str = "../data/"
+
+extraction: dict = {}
+recipes: dict = {}
+machines: dict = {}
+resources: dict = {}
 
 
-def __ls_dir(path: str) -> list[str]:
+def __ls_dir_abs(path: str) -> list[str]:
     directory_files = os.listdir(path)
     directory_files = list(
         map(lambda x: os.path.join(DATA_DIR, x), directory_files))
     directory_files = list(map(lambda x: os.path.abspath(x), directory_files))
     return list(filter(lambda x: os.path.isfile(x), directory_files))
+
+
+def __load_into_dicts(dicts: list[dict]):
+    global extraction, recipes, machines, resources
+
+    for book in dicts:
+        if "extraction" in book:
+            extraction = book
+        elif "recipes" in book:
+            recipes = book
+        elif "machines" in book:
+            machines = book
+        elif "resources" in book:
+            resources = book
+        else:
+            print("""Error, additional dictionary loaded from file.
+No dict object ready.""")
+            print(f"Please create dict object for: {list(book.keys())[0]}")
 
 
 def __load_json(paths: list[str]) -> list[dict]:
@@ -31,14 +54,16 @@ def __load_json(paths: list[str]) -> list[dict]:
         except IOError as e:
             print("Error occured while working with file at path:", path, e)
         finally:
-            print("Read JSON from file at path:", path)
+            # print("Read JSON from file at path:", path)
+            continue
 
     return dicts
 
 
 def main():
     print("Data directory is set as:", DATA_DIR)
-    _ = __load_json(__ls_dir(DATA_DIR))  # list[dict]
+    dicts = __load_json(__ls_dir_abs(DATA_DIR))  # list[dict]
+    __load_into_dicts(dicts)
 
 
 if __name__ == "__main__":
