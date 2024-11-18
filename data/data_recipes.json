@@ -12,7 +12,7 @@
 		"Iron Rod": {
 			"machine": "Constructor",
 			"in": {
-				"Iron Ore": 15
+				"Iron Ingot": 15
 			},
 			"out": {
 				"Iron Rod": 15
