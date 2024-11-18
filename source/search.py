@@ -68,10 +68,12 @@ class Search():
 
         while items_to_visit != []:
             item_page = items_to_visit.pop()
+            # item_page is only from reqs first time around,
+            # subsequent times, it is an input value from the current recipe
             request_name, request_count = self.__unpack_dict(item_page)
             input_is_raw_resource = False
 
-            # finding in recipes first, then resources
+            # NOTE: pulling information from bookdata class
             try:
                 recipe_page = self.bd.recipes[request_name]
             except KeyError:
@@ -86,11 +88,7 @@ class Search():
                           request_name}' within recipes or resources book")
                     return
 
-            machine_name: str = recipe_page["machine"]
-            machine_power_mw: int = self.bd.machines[machine_name]["power_mw"]
-            self.__add_int_to_dict(machine_name, self.machines_needed)
-            self.power_mw_needed += machine_power_mw
-
+            # NOTE: readying input/output information
             output_dict: dict = recipe_page["out"]
             input_dict: dict = recipe_page["in"]
             if input_dict == 0:
@@ -108,7 +106,7 @@ class Search():
             print("OUT: ", output_dict)
             print("IN:  ", input_dict)
 
-            # adding item to intermediate materials
+            # NOTE: adding info to materials
             input_is_intermediate_material: bool = (
                 input_name not in self.final_items and
                 not input_is_raw_resource
@@ -118,6 +116,12 @@ class Search():
             elif input_is_raw_resource:
                 self.__add_value_to_dict(input_dict, self.raw_materials)
                 pass
+
+            # NOTE: adding info to machines and power
+            machine_name: str = recipe_page["machine"]
+            machine_power_mw: int = self.bd.machines[machine_name]["power_mw"]
+            self.__add_int_to_dict(machine_name, self.machines_needed)
+            self.power_mw_needed += machine_power_mw
 
             # add the inputs to the items_to_visit list
             if input_dict != 0:
