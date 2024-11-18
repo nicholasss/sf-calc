@@ -14,6 +14,16 @@
 			"power_mw": 15,
 			"conn_in": 2,
 			"conn_out": 1
+		},
+		"Miner": {
+			"power_mw": 6,
+			"conn_in": 0,
+			"conn_out": 1
+		},
+		"Water Extractor": {
+			"power_mw": 20,
+			"conn_in": 0,
+			"conn_out": 1
 		}
 	}
 }
