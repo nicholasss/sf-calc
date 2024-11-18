@@ -75,6 +75,20 @@ def main():
         search = Search()
         requirements = search.set_requirements(recipe_request)
 
+        print(search.raw_materials)
+        for raw_mat in search.raw_materials:
+            print(raw_mat)
+
+        print(search.inter_materials)
+        for inter_mat in search.inter_materials:
+            print(inter_mat)
+
+        print(search.machines_needed)
+        for machine in search.machines_needed:
+            print(machine)
+
+        print(f"Total Power Requirements: {search.power_mw_needed}")
+
 
 if __name__ == "__main__":
     main()
