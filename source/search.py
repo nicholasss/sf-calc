@@ -53,14 +53,14 @@ class Search():
         # calculating output ratio:
         item_request_count = self.__count_in_dict(reqs)
         item_output_count = self.bd.recipes[item]["out"][item]
-        output_to_recipe_ratio: float = (
+        request_ratio: float = (
             item_request_count / item_output_count
         )
-        print("request ratio: ", output_to_recipe_ratio)
+        print("request ratio: ", request_ratio)
 
-        self.find_requirements(self.requirements, output_to_recipe_ratio)
+        self.find_requirements(self.requirements, request_ratio)
 
-    def find_requirements(self, reqs: dict, output_to_recipe_ratio: float):
+    def find_requirements(self, reqs: dict, request_ratio: float):
 
         items_to_visit: list = []  # list of tuples?
         items_to_visit.append(reqs)
@@ -88,6 +88,13 @@ class Search():
                           request_name}' within recipes or resources book")
                     return
 
+            # NOTE: adding info to machines and power
+            # cannot be further down, due to early return
+            machine_name: str = recipe_page["machine"]
+            machine_power_mw: int = self.bd.machines[machine_name]["power_mw"]
+            self.__add_int_to_dict(machine_name, self.machines_needed)
+            self.power_mw_needed += machine_power_mw
+
             # NOTE: readying input/output information
             output_dict: dict = recipe_page["out"]
             input_dict: dict = recipe_page["in"]
@@ -101,10 +108,14 @@ class Search():
             if input_name in self.bd.resources:
                 input_is_raw_resource = True
 
+            # NOTE: calculations for how many inputs/machines needed
+            if request_ratio != 1.0:
+                print("performing ratio calculations")
+
             # TODO: delete this block for debugging later
             print("\nITEM:", request_name)
-            print("OUT: ", output_dict)
-            print("IN:  ", input_dict)
+            print("OUT: ", output_name, output_count)
+            print("IN:  ", input_name, input_count)
 
             # NOTE: adding info to materials
             input_is_intermediate_material: bool = (
@@ -116,12 +127,6 @@ class Search():
             elif input_is_raw_resource:
                 self.__add_value_to_dict(input_dict, self.raw_materials)
                 pass
-
-            # NOTE: adding info to machines and power
-            machine_name: str = recipe_page["machine"]
-            machine_power_mw: int = self.bd.machines[machine_name]["power_mw"]
-            self.__add_int_to_dict(machine_name, self.machines_needed)
-            self.power_mw_needed += machine_power_mw
 
             # add the inputs to the items_to_visit list
             if input_dict != 0:
