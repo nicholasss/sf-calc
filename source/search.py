@@ -15,6 +15,14 @@ class Search():
         self.machines_needed: dict = {}
         self.power_mw_needed: int = 0
 
+    def __unpack_dict(self, item: dict) -> (str, int):
+        for key in item:
+            name = key
+            num = item[key]
+            if num == 0:
+                return (None, 0)
+        return (name, num)
+
     def __add_int_to_dict(self, new_item: str, book: dict):
         if new_item not in book:
             book[new_item] = 1
