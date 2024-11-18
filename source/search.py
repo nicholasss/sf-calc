@@ -32,6 +32,7 @@ class Search():
 
         items_to_visit: list = []
         items_to_visit.append(reqs)
+        item_is_raw_resource: bool = False
 
         while items_to_visit != []:
             item = items_to_visit.pop()
@@ -40,6 +41,10 @@ class Search():
                 count = item[key]
             item = list(item.keys())[0]
 
+            # set to false every loop
+            item_is_raw_resource = False
+
+            # finding in recipes first, then resources
             try:
                 item_book = self.bd.recipes[item]
             except KeyError:
@@ -47,6 +52,8 @@ class Search():
             if item_book is None:
                 try:
                     item_book = self.bd.resources[item]
+                    item_is_raw_resource = True
+                    # set here, as if its not found then it will get reset next loop
                 except KeyError:
                     print(f"Error! Unable to find '{
                           item}' within recipes or resources book")
@@ -58,12 +65,22 @@ class Search():
             item_output: dict = item_book["out"]
             item_input: dict = item_book["in"]
 
+            # adding machines and power requirements
             self.__add_to_dict(machine, self.machines_needed)
             self.power_mw_needed += machine_power_mw
 
-            if list(item_output.keys())[0] not in self.final_items:
+            # adding item to intermediate materials
+            if (
+                list(item_output.keys())[0] not in self.final_items and
+                not item_is_raw_resource
+            ):
+                print("item is intermeciate mat")
                 self.__add_to_dict(list(item_output.keys())[0],
                                    self.inter_materials)
+            elif item_is_raw_resource:  # and not a final_items
+                print("item is raw resource")
+                self.__add_to_dict(list(item_output.keys())[0],
+                                   self.raw_materials)
 
             # add the inputs to the items_to_visit list
             if item_input != 0:
