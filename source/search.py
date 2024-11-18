@@ -13,7 +13,7 @@ class Search():
         self.raw_materials: dict = {}
         self.inter_materials: dict = {}
         self.machines_needed: dict = {}
-        self.power_mw_needed: dict = {}
+        self.power_mw_needed: int = 0
 
     def add_to_dict(self, new_item: str, book: dict):
         for item in book:
@@ -44,19 +44,23 @@ class Search():
             try:
                 item_book = self.bd.recipes[item]
             except KeyError:
+                item_book = None
+            if item_book is None:
                 try:
                     item_book = self.bd.resources[item]
                 except KeyError:
-                    print(f"Error Unable to find {item} within resources book")
-                print(f"Error Unable to find {item} within recipes book.")
-                return
+                    print(f"Error! Unable to find '{
+                          item}' within recipes or resources book")
+                    return
 
             machine: str = item_book["machine"]
+            machine_power_mw: int = self.bd.machines[machine]["power_mw"]
 
             item_output: dict = item_book["out"]
             item_input: dict = item_book["in"]
 
             self.add_to_dict(machine, self.machines_needed)
+            self.power_mw_needed += machine_power_mw
 
             if list(item_output.keys())[0] not in self.final_items:
                 self.add_to_dict(list(item_output.keys())[0],
