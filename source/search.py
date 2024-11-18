@@ -1,6 +1,7 @@
 # search class to look find the ingredients needed
 
 from data_initializer import BookData
+import math
 
 
 class Search():
@@ -17,6 +18,8 @@ class Search():
 
     def __unpack_dict(self, item: dict) -> (str, int):
         for key in item:
+            if key is None:
+                return (None, 0)
             name = key
             num = item[key]
         return (name, num)
@@ -56,11 +59,11 @@ class Search():
         request_ratio: float = (
             item_request_count / item_output_count
         )
-        print("request ratio: ", request_ratio)
 
         self.find_requirements(self.requirements, request_ratio)
 
     def find_requirements(self, reqs: dict, request_ratio: float):
+        print(f"The request ratio is: {request_ratio}")
 
         items_to_visit: list = []  # list of tuples?
         items_to_visit.append(reqs)
@@ -84,23 +87,16 @@ class Search():
                     # set here, as if its not found then
                     # it will get reset next loop
                 except KeyError:
-                    print(f"Error! Unable to find '{
-                          request_name}' within recipes or resources book")
+                    # print(f"Error! Unable to find '{
+                    #       request_name}' within recipes or resources book")
+                    # print("Returning from function early.")
                     return
-
-            # NOTE: adding info to machines and power
-            # cannot be further down, due to early return
-            machine_name: str = recipe_page["machine"]
-            machine_power_mw: int = self.bd.machines[machine_name]["power_mw"]
-            self.__add_int_to_dict(machine_name, self.machines_needed)
-            self.power_mw_needed += machine_power_mw
 
             # NOTE: readying input/output information
             output_dict: dict = recipe_page["out"]
             input_dict: dict = recipe_page["in"]
             if input_dict == 0:
-                # early return due to no inputs for current item
-                return
+                input_dict = {None, 0}
 
             output_name, output_count = self.__unpack_dict(output_dict)
             input_name, input_count = self.__unpack_dict(input_dict)
@@ -109,13 +105,22 @@ class Search():
                 input_is_raw_resource = True
 
             # NOTE: calculations for how many inputs/machines needed
+            print("\nPerforming ratio calculations.")
             if request_ratio != 1.0:
-                print("performing ratio calculations")
+                calc_input_count = int(input_count * request_ratio)
+                calc_output_count = int(output_count * request_ratio)
+            else:
+                calc_input_count = input_count
+                calc_output_count = output_count
+
+            print(calc_output_count)
+            num_machines = math.ceil(calc_output_count / output_count)
+            print(num_machines)
 
             # TODO: delete this block for debugging later
-            print("\nITEM:", request_name)
-            print("OUT: ", output_name, output_count)
-            print("IN:  ", input_name, input_count)
+            print("ITEM:", request_name)
+            print("OUT: ", output_name, "-", output_count)
+            print("IN:  ", input_name, "-", input_count)
 
             # NOTE: adding info to materials
             input_is_intermediate_material: bool = (
@@ -123,10 +128,20 @@ class Search():
                 not input_is_raw_resource
             )
             if input_is_intermediate_material:
-                self.__add_value_to_dict(input_dict, self.inter_materials)
+                self.__add_value_to_dict(
+                    {input_name: calc_input_count}, self.inter_materials)
             elif input_is_raw_resource:
-                self.__add_value_to_dict(input_dict, self.raw_materials)
+                self.__add_value_to_dict(
+                    {input_name: calc_input_count}, self.raw_materials)
                 pass
+
+            # NOTE: adding info to machines and power
+            machine_name: str = recipe_page["machine"]
+            machine_power_mw: int = self.bd.machines[machine_name]["power_mw"]
+            self.__add_value_to_dict(
+                {machine_name: num_machines}, self.machines_needed)
+            # self.__add_int_to_dict(machine_name, self.machines_needed)
+            self.power_mw_needed += num_machines * machine_power_mw
 
             # add the inputs to the items_to_visit list
             if input_dict != 0:

@@ -87,8 +87,11 @@ def main():
 
         print("\nIntermediate Materials to Produce:")
         for inter_mat in search.inter_materials:
-            print("-{:5d}/min {:15s}".format(search.inter_materials[inter_mat],
-                                             inter_mat))
+            if inter_mat is None:
+                pass
+            else:
+                print("-{:5d}/min {:15s}".format(search.inter_materials[inter_mat],
+                                                 inter_mat))
 
         print("\nMachines Needed For Production:")
         for machine in search.machines_needed:
