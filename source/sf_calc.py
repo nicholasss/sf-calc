@@ -73,21 +73,29 @@ def main():
         recipe_request: dict = {recipe: count}
 
         search = Search()
-        requirements = search.set_requirements(recipe_request)
+        search.set_requirements(recipe_request)
 
-        print(search.raw_materials)
+        # Printing Request
+        print("\nRequested Recipes:")
+        for item in recipe_request:
+            print("-{:5d} {:15s}".format(recipe_request[item], item))
+
+        print("\nRaw Materials Needed:")
         for raw_mat in search.raw_materials:
-            print(raw_mat)
+            print("-{:5d} {:15s}".format(search.raw_materials[raw_mat],
+                                         raw_mat))
 
-        print(search.inter_materials)
+        print("\nIntermediate Materials to Produce:")
         for inter_mat in search.inter_materials:
-            print(inter_mat)
+            print("-{:5d} {:15s}".format(search.inter_materials[inter_mat],
+                                         inter_mat))
 
-        print(search.machines_needed)
+        print("\nMachines Needed For Production:")
         for machine in search.machines_needed:
-            print(machine)
+            print("-{:5d} {:15s}".format(search.machines_needed[machine],
+                                         machine))
 
-        print(f"Total Power Requirements: {search.power_mw_needed}")
+        print(f"\nTotal Power Requirements: {search.power_mw_needed}MW")
 
 
 if __name__ == "__main__":

@@ -74,11 +74,9 @@ class Search():
                 list(item_output.keys())[0] not in self.final_items and
                 not item_is_raw_resource
             ):
-                print("item is intermeciate mat")
                 self.__add_to_dict(list(item_output.keys())[0],
                                    self.inter_materials)
             elif item_is_raw_resource:  # and not a final_items
-                print("item is raw resource")
                 self.__add_to_dict(list(item_output.keys())[0],
                                    self.raw_materials)
 
