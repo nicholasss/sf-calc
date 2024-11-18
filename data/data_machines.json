@@ -1,19 +1,16 @@
 {
 	"machines": {
-		"smelter": {
-			"name": "Smelter",
+		"Smelter": {
 			"power_mw": 4,
 			"conn_in": 1,
 			"conn_out": 1
 		},
-		"constructor": {
-			"name": "Constructor",
+		"Constructor": {
 			"power_mw": 4,
 			"conn_in": 1,
 			"conn_out": 1
 		},
-		"assembler": {
-			"name": "Assembler",
+		"Assembler": {
 			"power_mw": 15,
 			"conn_in": 2,
 			"conn_out": 1
