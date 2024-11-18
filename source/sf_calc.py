@@ -30,6 +30,21 @@ parser.add_argument(
 args = parser.parse_args()
 
 
+def __printf(print_dict: dict, cont: str = None):
+    if cont is None:
+        cont = ""
+
+    for key in print_dict:
+        if key is None:
+            continue
+        value = print_dict[key]
+
+        if type(value) is int:
+            print("-{:5d}".format(value), cont, "{:15s}".format(key))
+        elif type(value) is float:
+            print("-{:5f}".format(value), cont, "{:15s}".format(key))
+
+
 def main():
     # argv: list[str] = sys.argv
     argc: int = len(sys.argv)
@@ -77,26 +92,16 @@ def main():
 
         # Printing Request
         print("\nRequested Recipes:")
-        for item in recipe_request:
-            print("-{:5d}/min {:15s}".format(recipe_request[item], item))
+        __printf(recipe_request, "per min")
 
         print("\nRaw Materials Needed:")
-        for raw_mat in search.raw_materials:
-            print("-{:5d}/min {:15s}".format(search.raw_materials[raw_mat],
-                                             raw_mat))
+        __printf(search.raw_materials, "per min")
 
         print("\nIntermediate Materials to Produce:")
-        for inter_mat in search.inter_materials:
-            if inter_mat is None:
-                pass
-            else:
-                print("-{:5d}/min {:15s}".format(search.inter_materials[inter_mat],
-                                                 inter_mat))
+        __printf(search.inter_materials, "per min")
 
         print("\nMachines Needed For Production:")
-        for machine in search.machines_needed:
-            print("-{:5d} {:15s}".format(search.machines_needed[machine],
-                                         machine))
+        __printf(search.machines_needed)
 
         print(f"\nTotal Power Requirements: {search.power_mw_needed}MW")
 
