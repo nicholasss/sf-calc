@@ -107,8 +107,8 @@ class Search():
             # NOTE: calculations for how many inputs/machines needed
             print("\nPerforming ratio calculations.")
             if request_ratio != 1.0:
-                calc_input_count = int(input_count * request_ratio)
-                calc_output_count = int(output_count * request_ratio)
+                calc_input_count = (input_count * request_ratio)
+                calc_output_count = (output_count * request_ratio)
             else:
                 calc_input_count = input_count
                 calc_output_count = output_count
