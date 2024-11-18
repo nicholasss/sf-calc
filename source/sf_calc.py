@@ -63,7 +63,7 @@ def main():
     if args.recipe:
         if len(args.recipe) > 1:
             print("Too many arguments provided for recipe.")
-        recipe = args.recipe[0]
+        recipe = args.recipe[0].title()
         if count > 1 and not None:
             s = "s"
         else:
