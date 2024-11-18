@@ -78,17 +78,17 @@ def main():
         # Printing Request
         print("\nRequested Recipes:")
         for item in recipe_request:
-            print("-{:5d} {:15s}".format(recipe_request[item], item))
+            print("-{:5d}/min {:15s}".format(recipe_request[item], item))
 
         print("\nRaw Materials Needed:")
         for raw_mat in search.raw_materials:
-            print("-{:5d} {:15s}".format(search.raw_materials[raw_mat],
-                                         raw_mat))
+            print("-{:5d}/min {:15s}".format(search.raw_materials[raw_mat],
+                                             raw_mat))
 
         print("\nIntermediate Materials to Produce:")
         for inter_mat in search.inter_materials:
-            print("-{:5d} {:15s}".format(search.inter_materials[inter_mat],
-                                         inter_mat))
+            print("-{:5d}/min {:15s}".format(search.inter_materials[inter_mat],
+                                             inter_mat))
 
         print("\nMachines Needed For Production:")
         for machine in search.machines_needed:
