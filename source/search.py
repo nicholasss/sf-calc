@@ -63,4 +63,5 @@ class Search():
                                  self.inter_materials)
 
             # add the inputs to the items_to_visit list
-            items_to_visit.append(item_input)
+            if item_input != 0:
+                items_to_visit.append(item_input)
