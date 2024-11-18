@@ -15,21 +15,20 @@ class Search():
         self.machines_needed: dict = {}
         self.power_mw_needed: int = 0
 
-    def add_to_dict(self, new_item: str, book: dict):
-        for item in book:
-            if new_item == item:
-                book[item] += 1
-            else:
-                book[new_item] = 1
+    def __add_to_dict(self, new_item: str, book: dict):
+        if new_item not in book:
+            book[new_item] = 1
+        else:
+            book[new_item] += 1
 
     def set_requirements(self, reqs: dict):
         self.requirements = reqs
         for item in self.requirements:
             self.final_items.append(item)
 
-        self.r_find_requirements(self.requirements)
+        self.find_requirements(self.requirements)
 
-    def r_find_requirements(self, reqs: dict):
+    def find_requirements(self, reqs: dict):
 
         items_to_visit: list = []
         items_to_visit.append(reqs)
@@ -59,12 +58,12 @@ class Search():
             item_output: dict = item_book["out"]
             item_input: dict = item_book["in"]
 
-            self.add_to_dict(machine, self.machines_needed)
+            self.__add_to_dict(machine, self.machines_needed)
             self.power_mw_needed += machine_power_mw
 
             if list(item_output.keys())[0] not in self.final_items:
-                self.add_to_dict(list(item_output.keys())[0],
-                                 self.inter_materials)
+                self.__add_to_dict(list(item_output.keys())[0],
+                                   self.inter_materials)
 
             # add the inputs to the items_to_visit list
             if item_input != 0:
