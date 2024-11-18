@@ -19,9 +19,15 @@ class Search():
         for key in item:
             name = key
             num = item[key]
-            if num == 0:
-                return (None, 0)
         return (name, num)
+
+    def __name_in_dict(self, item: dict) -> str:
+        for key in item:
+            return key
+
+    def __count_in_dict(self, item: dict) -> int:
+        for key in item:
+            return item[key]
 
     def __add_int_to_dict(self, new_item: str, book: dict):
         if new_item not in book:
