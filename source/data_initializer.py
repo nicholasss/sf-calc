@@ -26,6 +26,9 @@ class BookData():
             print("Problem found with books.")
 
     def __ls_dir_abs(self, path: str) -> list[str]:
+        if not os.path.isdir(path):
+            print("Error! Unable to find path from current directory.")
+            print(f"Does '{path}' exist?\n")
         directory_files = os.listdir(path)
         directory_files = list(
             map(lambda x: os.path.join(DATA_DIR, x), directory_files))
