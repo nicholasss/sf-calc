@@ -134,5 +134,7 @@ class Search():
             self.power_mw_needed += num_machines * machine_power_mw
 
             # add the inputs to the items_to_visit list
+            print(input_dict)
+            # is input dicts the correct variable to use here?
             if input_dict != 0:
                 items_to_visit.append(input_dict)
