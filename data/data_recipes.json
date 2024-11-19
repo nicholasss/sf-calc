@@ -35,6 +35,104 @@
 			"out": {
 				"Copper Ingot": 30
 			}
+		},
+		"Aluminum Ingot": {
+			"machine": "Foundry",
+			"in": {
+				"Aluminum Scrap": 90,
+				"Silica": 75
+			},
+			"out": {
+				"Aluminum Ingot": 60
+			}
+		},
+		"Aluminum Scrap": {
+			"machine": "Refinery",
+			"in": {
+				"Aluminum Solution": 240,
+				"Coal": 120
+			},
+			"out": {
+				"Aluminum Scrap": 360,
+				"Water": 120
+			}
+		},
+		"Alumina Solution": {
+			"machine": "Refinery",
+			"in": {
+				"Bauxite": 120,
+				"Water": 180
+			},
+			"out": {
+				"Alumina Solution": 120,
+				"Silica": 50
+			}
+		},
+		"Silica": {
+			"machine": "Constructor",
+			"in": {
+				"Raw Quartz": 22.5
+			},
+			"out": {
+				"Silica": 37.5
+			}
+		},
+		"Wire": {
+			"machine": "Constructor",
+			"in": {
+				"Copper Ingot": 15
+			},
+			"out": {
+				"Wire": 30
+			}
+		},
+		"Cable": {
+			"machine": "Constructor",
+			"in": {
+				"Wire": 60
+			},
+			"out": {
+				"Cable": 30
+			}
+		},
+		"Copper Sheet": {
+			"machine": "Constructor",
+			"in": {
+				"Copper Ingot": 20
+			},
+			"out": {
+				"Copper Sheet": 10
+			}
+		},
+		"Reinforced Iron Plate": {
+			"machine": "Assembler",
+			"in": {
+				"Iron Plate": 30,
+				"Screw": 60
+			},
+			"out": {
+				"Reinforced Iron Plate": 5
+			}
+		},
+		"Modular Frame": {
+			"machine": "Assembler",
+			"in": {
+				"Reinforced Iron Plate": 3,
+				"Iron Rod": 12
+			},
+			"out": {
+				"Modular Frame": 2
+			}
+		},
+		"Rotor": {
+			"machine": "Assembler",
+			"in": {
+				"Iron Rod": 20,
+				"Screw": 100
+			},
+			"out": {
+				"Rotor": 4
+			}
 		}
 	}
 }

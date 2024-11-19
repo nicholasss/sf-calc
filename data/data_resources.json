@@ -34,6 +34,20 @@
 			"out": {
 				"Water": 120
 			}
+		},
+		"Bauxite": {
+			"machine": "Miner",
+			"in": 0,
+			"out": {
+				"Bauxite": 60
+			}
+		},
+		"Raw Quartz": {
+			"machine": "Miner",
+			"in": 0,
+			"out": {
+				"Raw Quartz": 60
+			}
 		}
 	}
 }
