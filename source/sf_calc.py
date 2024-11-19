@@ -53,7 +53,7 @@ def main():
         print("Not enough arguments provided.")
         return
 
-    print(f"\nProvided arguments are: {args}")
+    # print(f"\nProvided arguments are: {args}")
 
     # NOTE: List Argument
     if args.list is not None and args.list == "all".lower():
@@ -61,6 +61,7 @@ def main():
         for recipe in bd.recipes:
             machine = bd.recipes[recipe]["machine"]
             print("-{:15s} made in {:15s}".format(recipe, machine))
+        del bd
 
     if args.count:
         try:
@@ -68,10 +69,12 @@ def main():
         except ValueError:
             print("Please supply an integer for count. Setting as 1.")
             count = 1
-    else:
-        count = 1
-    if count <= 0:
-        print("Count provided needs to be at least 1. Setting as 1.")
+
+        if count <= 0:
+            print("Count provided needs to be at least 1. Setting as 1.")
+            count = 1
+
+    else:  # count was not provided
         count = 1
 
     # NOTE: Recipe Argument
@@ -79,7 +82,13 @@ def main():
         if len(args.recipe) > 1:
             print("Too many arguments provided for recipe.")
         recipe = args.recipe[0].title()
-        if count > 1 and not None:
+
+        if not args.count:  # count argument was not provided
+            bd = BookData()
+            count = bd.recipes[recipe]["out"][recipe]
+            del bd
+
+        if count > 1:
             s = "s"
         else:
             s = ""
@@ -104,6 +113,8 @@ def main():
         __printf(search.machines_needed)
 
         print(f"\nTotal Power Requirements: {search.power_mw_needed}MW")
+
+        del search
 
 
 if __name__ == "__main__":
