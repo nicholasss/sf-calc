@@ -12,7 +12,7 @@ DATA_DIR: str = "data"
 # TODO: add a context argument for the "__name__" to be printed, or something.
 class BookData():
     def __init__(self):
-        print(f"Data directory is set as: '{DATA_DIR}'")
+        # print(f"Data directory is set as: '{DATA_DIR}'")
 
         self.extraction: dict = {}
         self.recipes: dict = {}
@@ -22,7 +22,8 @@ class BookData():
         self.book_paths: list[str] = self.__ls_dir_abs(DATA_DIR)
         self.__load_into_dicts(self.__json_load(self.book_paths))
         if self.check_books():
-            print("Book Data is fully loaded and verified.")
+            # print("Book Data is fully loaded and verified.")
+            pass
         else:
             print("Problem found with books.")
 
