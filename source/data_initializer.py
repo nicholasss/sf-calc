@@ -2,10 +2,11 @@
 # file initializes data from json and checks it over for any logical errors
 
 import os
+import sys
 import json
 
 
-DATA_DIR: str = "../data/"
+DATA_DIR: str = "data"
 
 
 # TODO: add a context argument for the "__name__" to be printed, or something.
@@ -26,12 +27,18 @@ class BookData():
             print("Problem found with books.")
 
     def __ls_dir_abs(self, path: str) -> list[str]:
-        if not os.path.isdir(path):
+        local_main_path = os.path.dirname(sys.path[0])
+        data_path = os.path.join(local_main_path, DATA_DIR)
+
+        if not os.path.isdir(data_path):
             print("Error! Unable to find path from current directory.")
-            print(f"Does '{path}' exist?\n")
-        directory_files = os.listdir(path)
+            print(f"Does '{data_path}' exist?\n")
+        try:
+            directory_files = os.listdir(f"../{path}")
+        except FileNotFoundError:
+            directory_files = os.listdir(path)
         directory_files = list(
-            map(lambda x: os.path.join(DATA_DIR, x), directory_files))
+            map(lambda x: os.path.join(data_path, x), directory_files))
         directory_files = list(
             map(lambda x: os.path.abspath(x), directory_files))
         return list(
