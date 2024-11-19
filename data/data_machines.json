@@ -59,6 +59,11 @@
 			"power_mw": 16,
 			"conn_in": 2,
 			"conn_out": 1
+		},
+		"Refinery": {
+			"power_mw": 30,
+			"conn_in": 2,
+			"conn_out": 2
 		}
 	}
 }
