@@ -40,9 +40,9 @@ def __printf(print_dict: dict, cont: str = None):
         value = print_dict[key]
 
         if type(value) is int:
-            print("> {:5d}".format(value), cont, "{:15s}".format(key))
+            print("> {:5d}".format(value), key, cont)
         elif type(value) is float:
-            print("> {:5.1f}".format(value), cont, "{:15s}".format(key))
+            print("> {:5.1f}".format(value), key, cont)
 
 
 def main():

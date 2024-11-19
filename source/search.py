@@ -63,9 +63,7 @@ class Search():
         self.find_requirements(self.requirements, request_ratio)
 
     def find_requirements(self, reqs: dict, request_ratio: float):
-        print(f"The request ratio is: {request_ratio}")
-
-        items_to_visit: list = []  # list of tuples?
+        items_to_visit: list = []
         items_to_visit.append(reqs)
         input_is_raw_resource: bool = False
 
@@ -105,7 +103,6 @@ class Search():
                 input_is_raw_resource = True
 
             # NOTE: calculations for how many inputs/machines needed
-            print("\nPerforming ratio calculations.")
             if request_ratio != 1.0:
                 calc_input_count = (input_count * request_ratio)
                 calc_output_count = (output_count * request_ratio)
@@ -113,14 +110,7 @@ class Search():
                 calc_input_count = input_count
                 calc_output_count = output_count
 
-            print(calc_output_count)
             num_machines = math.ceil(calc_output_count / output_count)
-            print(num_machines)
-
-            # TODO: delete this block for debugging later
-            print("ITEM:", request_name)
-            print("OUT: ", output_name, "-", output_count)
-            print("IN:  ", input_name, "-", input_count)
 
             # NOTE: adding info to materials
             input_is_intermediate_material: bool = (
