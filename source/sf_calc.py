@@ -5,7 +5,7 @@
 import sys
 import argparse
 
-from data_initializer import BookData
+from bookdata import BookData
 from search import Search
 
 # setup parser object
