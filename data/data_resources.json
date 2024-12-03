@@ -4,49 +4,49 @@
 			"machine": "Miner",
 			"in": 0,
 			"out": {
-				"Iron Ore": 60
+				"self": 60
 			}
 		},
 		"Copper Ore": {
 			"machine": "Miner",
 			"in": 0,
 			"out": {
-				"Copper Ore": 60
+				"self": 60
 			}
 		},
 		"Limestone Ore": {
 			"machine": "Miner",
 			"in": 0,
 			"out": {
-				"Limestone Ore": 60
+				"self": 60
 			}
 		},
 		"Coal Ore": {
 			"machine": "Miner",
 			"in": 0,
 			"out": {
-				"Coal Ore": 60
+				"self": 60
 			}
 		},
 		"Water": {
 			"machine": "Water Extractor",
 			"in": 0,
 			"out": {
-				"Water": 120
+				"self": 120
 			}
 		},
 		"Bauxite": {
 			"machine": "Miner",
 			"in": 0,
 			"out": {
-				"Bauxite": 60
+				"self": 60
 			}
 		},
 		"Raw Quartz": {
 			"machine": "Miner",
 			"in": 0,
 			"out": {
-				"Raw Quartz": 60
+				"self": 60
 			}
 		}
 	}
