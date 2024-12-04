@@ -15,7 +15,19 @@ class RecipeTree():
         self.__load_inputs()
 
     def __str__(self):
-        return f"Root: {self.root.name}\ninputs: {self.raw_inputs}"
+        inputs = []
+        for input in self.inputs:
+            inputs.append(str(input))
+
+        raw_inputs = []
+        for rinput in self.raw_inputs:
+            raw_inputs.append(str(rinput))
+
+        outputs = []
+        for output in self.outputs:
+            outputs.append(str(output))
+
+        return f"Root: {self.root.name}\ninputs: {raw_inputs}, {inputs}\noutputs: {outputs}\nmachines: {self.machines}\npower_mw: {self.power_mw}"
 
     def __load_inputs(self):
         # for each IONode in the nodes inputs, create a RecipeNode and

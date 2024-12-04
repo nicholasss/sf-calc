@@ -10,3 +10,4 @@ class TestRecipeTree(unittest.TestCase):
         rt1: RecipeTree = RecipeTree(iron_plate)
 
         self.assertEqual(str(rt1.root), str(iron_plate))
+        print(rt1)
