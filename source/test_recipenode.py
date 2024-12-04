@@ -25,11 +25,16 @@ class TestRecipeNode(unittest.TestCase):
 
         self.assertEqual(rcnode1.name, "Screw")
         self.assertEqual(rcnode1.qty, 40.0)
+        self.assertEqual(rcnode1.type, "recipe")
         self.assertEqual(str(rcnode1.inputs[0]), str(IONode("Iron Rod", 10)))
+        self.assertEqual(str(rcnode1.outputs[0]), str(IONode("Screw", 40)))
 
     def test_two(self):
         rcnode2: RecipeNode = RecipeNode("Iron Ingot", 50)
 
         self.assertEqual(rcnode2.name, "Iron Ingot")
         self.assertEqual(rcnode2.qty, 50.0)
+        self.assertEqual(rcnode2.type, "recipe")
         self.assertEqual(str(rcnode2.inputs[0]), str(IONode("Iron Ore", 30)))
+        self.assertEqual(str(rcnode2.outputs[0]), str(
+            IONode("Iron Ingot", 30)))

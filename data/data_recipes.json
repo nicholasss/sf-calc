@@ -1,5 +1,14 @@
 {
 	"recipes": {
+		"Iron Plate": {
+			"machine": "Assembler",
+			"in": {
+				"Iron Ingot": 30
+			},
+			"out": {
+				"Iron Plate": 20
+			}
+		},
 		"Iron Ingot": {
 			"machine": "Smelter",
 			"in": {

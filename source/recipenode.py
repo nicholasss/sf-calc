@@ -54,7 +54,7 @@ class RecipeNode():
         bd_out = bd_recipe["out"]
 
         if list(bd_out.keys()) == ["self"]:
-            print("Recipe requires no inputs")
+            # print("Recipe requires no inputs")
             self.inputs.append(None)
             self.outputs.append(IONode("self", bd_out["self"]))
 
