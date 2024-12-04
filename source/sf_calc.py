@@ -7,7 +7,8 @@ import argparse
 
 from bookdata import BookData
 from search import Search
-from recipenode import RecipeNode
+from recipenode import RecipeNode, IONode
+from recipetree import RecipeTree
 
 # setup parser object
 parser = argparse.ArgumentParser(description="Satisfactory Calculator CLI.")
@@ -83,7 +84,9 @@ def main():
 
         # NOTE: testing recipenode class
         rn = RecipeNode(args.recipe[0], count)
+        rt = RecipeTree(rn)
         print(rn)
+        print(rt)
 
         if len(args.recipe) > 1:
             print("Too many arguments provided for recipe.")

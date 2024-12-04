@@ -3,8 +3,8 @@ from bookdata import BookData
 
 class IONode():
     def __init__(self, name: str, qty: float):
-        self.name = name
-        self.qty = qty
+        self.name: str = name
+        self.qty: float = float(qty)
 
     def __str__(self):
         return f"{self.qty} of {self.name}"
