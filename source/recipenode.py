@@ -23,6 +23,7 @@ class RecipeNode():
             self.qty: float = qty
 
         self.machine: str = bd_page["machine"]
+        self.power_mw: int = 0
         self.inputs: list = []
         self.outputs: list = []
 

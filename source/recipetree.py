@@ -12,7 +12,12 @@ class RecipeTree():
         self.machines: list(str) = []
         self.power_mw: int = 0
 
+        self.__load()
+
+    def __load(self):
         self.__load_inputs()
+        self.__load_outputs()
+        self.__load_machines_power_reqs()
 
     def __str__(self):
         inputs = []
@@ -32,7 +37,7 @@ class RecipeTree():
     def __load_inputs(self):
         # for each IONode in the nodes inputs, create a RecipeNode and
         # add its inputs unless its "self"
-        to_visit: list = self.root.inputs
+        to_visit: list = self.root.inputs.copy()
 
         while len(to_visit) > 0:
             curr_io_node: IONode = to_visit.pop()
@@ -51,9 +56,23 @@ class RecipeTree():
             to_visit.extend(curr_recipe_node.inputs)
 
     def __load_outputs(self):
-        pass
+        self.outputs = self.root.outputs
 
         # same as inputs but only for the outputs
 
     def __load_machines_power_reqs(self):
-        pass
+
+        to_visit: list = self.root.inputs.copy()
+
+        while len(to_visit) > 0:
+            curr_io_node: IONode = to_visit.pop()
+            if curr_io_node is None:
+                continue
+
+            curr_recipe_node: RecipeNode = RecipeNode(
+                curr_io_node.name, curr_io_node.qty)
+
+            self.machines.append(curr_recipe_node.machine)
+            self.power_mw += curr_recipe_node.power_mw
+
+            to_visit.extend(curr_recipe_node.inputs)
