@@ -42,7 +42,7 @@ class RecipeTree:
         for machine in self.machines:
             machines.append(str(machine))
 
-        return f"\nRoot: {self.root.name}\nraw inputs: {raw_inputs}\nintermediate inputs:{inputs}\noutputs: {outputs}\nmachines: {machines}\npower_mw: {self.power_mw}"
+        return f"\nRoot Recipe: {self.root.qty} of {self.root.name}\nraw inputs: {raw_inputs}\nintermediate inputs:{inputs}\noutputs: {outputs}\nmachines: {machines}\npower_mw: {self.power_mw}"
 
     def __process_inputs(self, input_type: str = ""):
         if input_type == "raw":
