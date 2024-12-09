@@ -22,12 +22,23 @@ class RecipeNode():
         else:
             self.qty: float = qty
 
-        self.machine: str = bd_page["machine"]
-        self.power_mw: int = 0
+        self.machine: str = bd_page["machine"]  # does this get converted to the string name? not the page?
+        self.power_mw: int = self.__find_power_mw_in_books(self.machine)
         self.inputs: list = []
         self.outputs: list = []
 
         self.__set_inputs_outputs()
+
+    def __find_power_mw_in_books(self, machine: str) -> int:
+        books = BookData()
+        bd_page = None
+
+        try:
+            bd_page = books.machines[machine]
+        except KeyError:
+            return None
+
+        return bd_page["power_mw"]
 
     def __find_in_books(self):
         books = BookData()

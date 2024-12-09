@@ -1,7 +1,7 @@
 from recipenode import RecipeNode, IONode
 
 
-class RecipeTree():
+class RecipeTree:
     def __init__(self, root_recipe: RecipeNode):
         self.root: RecipeNode = root_recipe
 
@@ -9,7 +9,7 @@ class RecipeTree():
         self.inputs: list = []
         self.outputs: list = []
 
-        self.machines: list(str) = []
+        self.machines: list = []
         self.power_mw: int = 0
 
         self.__load()
@@ -45,7 +45,8 @@ class RecipeTree():
                 continue
 
             curr_recipe_node: RecipeNode = RecipeNode(
-                curr_io_node.name, curr_io_node.qty)
+                curr_io_node.name, curr_io_node.qty
+            )
 
             if curr_recipe_node.type == "recipe":
                 self.inputs.append(curr_io_node)
@@ -61,7 +62,6 @@ class RecipeTree():
         # same as inputs but only for the outputs
 
     def __load_machines_power_reqs(self):
-
         to_visit: list = self.root.inputs.copy()
 
         while len(to_visit) > 0:
@@ -70,7 +70,8 @@ class RecipeTree():
                 continue
 
             curr_recipe_node: RecipeNode = RecipeNode(
-                curr_io_node.name, curr_io_node.qty)
+                curr_io_node.name, curr_io_node.qty
+            )
 
             self.machines.append(curr_recipe_node.machine)
             self.power_mw += curr_recipe_node.power_mw
