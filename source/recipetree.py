@@ -12,6 +12,8 @@ class RecipeTree:
         self.machines: list = []
         self.power_mw: int = 0
 
+        self.input_ratio: int = 0
+
         self.__load()
         self.__process()
 
@@ -42,7 +44,7 @@ class RecipeTree:
         for machine in self.machines:
             machines.append(str(machine))
 
-        return f"\nRoot Recipe: {self.root.qty} of {self.root.name}\nraw inputs: {raw_inputs}\nintermediate inputs:{inputs}\noutputs: {outputs}\nmachines: {machines}\npower_mw: {self.power_mw}"
+        return f"\nRoot Recipe: {self.root.qty} of {self.root.name}\nraw inputs: {raw_inputs}\nintermediate inputs: {inputs}\noutputs: {outputs}\nmachines: {machines}\npower_mw: {self.power_mw}"
 
     def __process_inputs(self, input_type: str = ""):
         if input_type == "raw":
@@ -127,3 +129,9 @@ class RecipeTree:
             self.power_mw += curr_recipe_node.power_mw
 
             to_visit.extend(curr_recipe_node.inputs)
+
+        # root output recipe
+        # NOTE: only adds one of the machines, may need to change later
+        output_recipe_node: RecipeNode = RecipeNode(self.root.name, self.root.qty)
+        self.machines.append(output_recipe_node.machine)
+        self.power_mw += output_recipe_node.power_mw
