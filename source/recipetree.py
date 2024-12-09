@@ -13,11 +13,17 @@ class RecipeTree:
         self.power_mw: int = 0
 
         self.__load()
+        self.__process()
 
     def __load(self):
         self.__load_inputs()
         self.__load_outputs()
         self.__load_machines_power_reqs()
+
+    def __process(self):
+        self.__process_inputs()
+        self.__process_inputs("raw")
+        self.__process_machines()
 
     def __str__(self):
         inputs = []
@@ -32,7 +38,51 @@ class RecipeTree:
         for output in self.outputs:
             outputs.append(str(output))
 
-        return f"Root: {self.root.name}\ninputs: {raw_inputs}, {inputs}\noutputs: {outputs}\nmachines: {self.machines}\npower_mw: {self.power_mw}"
+        machines = []
+        for machine in self.machines:
+            machines.append(str(machine))
+
+        return f"\nRoot: {self.root.name}\nraw inputs: {raw_inputs}\nintermediate inputs:{inputs}\noutputs: {outputs}\nmachines: {machines}\npower_mw: {self.power_mw}"
+
+    def __process_inputs(self, input_type: str = ""):
+        if input_type == "raw":
+            nodes = self.raw_inputs.copy()
+        else:
+            nodes = self.inputs.copy()
+
+        processed_nodes: list = []
+        for input_n in nodes:
+            processed = next(
+                (node for node in processed_nodes if node.name == input_n.name), None
+            )
+            if processed:
+                processed.qty += input_n.qty
+            else:
+                processed_nodes.append(input_n)
+
+        if input_type == "raw":
+            self.raw_inputs = processed_nodes
+        else:
+            self.inputs = processed_nodes
+
+    def __process_machines(self):
+        machines: list = self.machines.copy()
+        io_machines: list = []
+        for mach in machines:
+            io_machines.append(IONode(mach, 1))
+
+        processed_machines: list = []
+        for io_machine in io_machines:
+            processed = next(
+                (mach for mach in processed_machines if mach.name == io_machine.name),
+                None,
+            )
+            if processed:  # already in list
+                processed.qty += 1
+            else:  # not in list yet
+                processed_machines.append(io_machine)
+
+        self.machines = processed_machines
 
     def __load_inputs(self):
         # for each IONode in the nodes inputs, create a RecipeNode and
