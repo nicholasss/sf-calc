@@ -1,7 +1,7 @@
 from bookdata import BookData
 
 
-class IONode():
+class IONode:
     def __init__(self, name: str, qty: float):
         self.name: str = name
         self.qty: float = float(qty)
@@ -9,11 +9,17 @@ class IONode():
     def __str__(self):
         return f"{self.qty} of {self.name}"
 
+    def __eq__(self, value: object) -> bool:
+        if type(value) is IONode:
+            return self.name == value.name and self.qty == value.qty
+        else:
+            return False
 
-class RecipeNode():
+
+class RecipeNode:
     def __init__(self, name: str, qty: float):
         self.name: str = name.title()
-        self.type: str = None
+        self.type: str = ""
         bd_page = self.__find_in_books()
 
         # sets qty to output if less than one
@@ -22,7 +28,9 @@ class RecipeNode():
         else:
             self.qty: float = qty
 
-        self.machine: str = bd_page["machine"]  # does this get converted to the string name? not the page?
+        self.machine: str = bd_page[
+            "machine"
+        ]  # does this get converted to the string name? not the page?
         self.power_mw: int = self.__find_power_mw_in_books(self.machine)
         self.inputs: list = []
         self.outputs: list = []
@@ -31,24 +39,24 @@ class RecipeNode():
 
     def __find_power_mw_in_books(self, machine: str) -> int:
         books = BookData()
-        bd_page = None
+        bd_page = 0
 
         try:
             bd_page = books.machines[machine]
         except KeyError:
-            return None
+            return 0
 
         return bd_page["power_mw"]
 
-    def __find_in_books(self):
+    def __find_in_books(self) -> dict:
         books = BookData()
-        bd_page = None
+        bd_page = {}
 
         try:
             bd_page = books.recipes[self.name]
         except KeyError:
             pass
-        if bd_page is not None:
+        if bd_page != {}:
             self.type = "recipe"
             return bd_page
 
@@ -56,7 +64,7 @@ class RecipeNode():
             bd_page = books.resources[self.name]
         except KeyError:
             print(f"unable to find {self.name} within books")
-        if bd_page is not None:
+        if bd_page != {}:
             self.type = "resource"
             return bd_page
 
