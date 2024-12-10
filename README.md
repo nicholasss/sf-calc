@@ -19,10 +19,37 @@ I found that I did not understand the TOML format as I implemented it, and decid
 This project, although conceived as a multifunction CLI tool, ended up being a single function CLI tool. It is useful for one thing, which is looking up a specific recipe and viewing its raw inputs required, intermediate products, as well as the machines required and the max potential power requirements.
 It can still help in planning by helping the player to plan the size of various sub-factories or floors in a larger building. This can prove useful as it can alleviate some trips to the Satisfactory wiki. 
 
-## How to Use
-This tool does not require any external modules and so can run with the standard Python 3.12+ install.
+## Future Todo's
+1. Refactor and fully implement the ability to request a specific amount of a material.
+2. Calculate average power use utilizing machine effeciency calculations.
+3. Implement argument to alphabetically sort the output of listing and calculations.
 
-Simply call the tool with the following syntax in order to receive the recipes requirements:
+## How to Use
+This tool does not require any external modules and so can run with the standard Python 3.12+ install. Simply clone it to whatever directory you would like.
+
+#### --list or -l
+You can list available recipes with the following syntax:
+```
+python3 ./source/sf_calc.py --list
+-Iron Plate              made in Constructor
+-Iron Ingot              made in Smelter
+-Iron Rod                made in Constructor
+-Screw                   made in Constructor
+-Copper Ingot            made in Smelter
+-Aluminum Ingot          made in Foundry
+-Aluminum Scrap          made in Refinery
+-Alumina Solution        made in Refinery
+-Silica                  made in Constructor
+-Wire                    made in Constructor
+-Cable                   made in Constructor
+-Copper Sheet            made in Constructor
+-Reinforced Iron Plate   made in Assembler
+-Modular Frame           made in Assembler
+-Rotor                   made in Assembler
+```
+#### Calculating
+You can find a particular materials requirements with the following syntax:
+*Note that material names with multiple words should be placed in quotation marks*
 ```
 python3 ./source/sf_calc.py "reinforced iron plate"
 
@@ -46,6 +73,7 @@ Machines Needed For Production:
 
 Maximum Power Required: 45MW
 ```
+Here is an additional example with the Screw material.
 ```
 python3 ./source/sf_calc.py screw
 
