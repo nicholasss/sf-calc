@@ -74,7 +74,7 @@ Machines Needed For Production:
 
 Maximum Power Required: 45MW
 ```
-Here is an additional example with the Screw material.
+Here is an additional example with the Screw:
 ```
 python3 ./source/sf_calc.py screw
 
