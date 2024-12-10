@@ -48,8 +48,9 @@ python3 ./source/sf_calc.py --list
 -Rotor                   made in Assembler
 ```
 #### Calculating
+*Note that material names with multiple words should be placed in quotation marks.*
+
 You can find a particular materials requirements with the following syntax:
-*Note that material names with multiple words should be placed in quotation marks*
 ```
 python3 ./source/sf_calc.py "reinforced iron plate"
 
