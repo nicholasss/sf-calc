@@ -25,5 +25,26 @@ This tool does not require any external modules and so can run with the standard
 Simply call the tool with the following syntax in order to receive the recipes requirements:
 ```bash
 python3 ./source/sf_calc.py "reinforced iron plate"
+Calculating recipe for 1 Reinforced Iron Plates.
+
+Requested Recipes:
+5 Reinforced Iron Plate per min
+
+Raw Materials Needed:
+60.0 of Iron Ore per min
+
+Intermediate Materials to Produce:
+60.0 of Screw per min
+10.0 of Iron Rod per min
+45.0 of Iron Ingot per min
+30.0 of Iron Plate per min
+
+Machines Needed For Production:
+3.0 of Constructor per min
+2.0 of Smelter per min
+2.0 of Miner per min
+1.0 of Assembler
+
+Maximum Power Required: 45MW
 python3 ./source/sf_calc.py screw
 ```
