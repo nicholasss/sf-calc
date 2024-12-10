@@ -23,6 +23,7 @@ It can still help in planning by helping the player to plan the size of various 
 1. Refactor and fully implement the ability to request a specific amount of a material.
 2. Calculate average power use utilizing machine effeciency calculations.
 3. Implement argument to alphabetically sort the output of listing and calculations.
+4. Expand the range of testing, including a test on the validity of the data itself (i.e. referenced materials/resources exist to be referenced).
 
 ## How to Use
 This tool does not require any external modules and so can run with the standard Python 3.12+ install. Simply clone it to whatever directory you would like.
