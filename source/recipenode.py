@@ -37,6 +37,16 @@ class RecipeNode:
 
         self.__set_inputs_outputs()
 
+    def __eq__(self, value: object, /) -> bool:
+        if type(value) is not RecipeNode:
+            return False
+        else:
+            return (
+                self.name == value.name
+                and self.qty == value.qty
+                and self.machine == value.machine
+            )
+
     def __find_power_mw_in_books(self, machine: str) -> int:
         books = BookData()
         bd_page = 0
