@@ -10,8 +10,8 @@ class TestRecipeTree(unittest.TestCase):
         rt1: RecipeTree = RecipeTree(iron_plate)
 
         self.assertEqual(
-            str(rt1.root),
-            str(iron_plate),
+            rt1.root,
+            iron_plate,
             "Recipe tree name missmatch with root recipe name",
         )
         self.assertEqual(
@@ -35,8 +35,8 @@ class TestRecipeTree(unittest.TestCase):
         rt2: RecipeTree = RecipeTree(reinf_iron_plate)
 
         self.assertEqual(
-            str(rt2.root),
-            str(reinf_iron_plate),
+            rt2.root,
+            reinf_iron_plate,
             "Recipe tree name mismatch with root recipe name",
         )
         self.assertEqual(
