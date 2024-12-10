@@ -18,3 +18,12 @@ I found that I did not understand the TOML format as I implemented it, and decid
 **Final Scope**
 This project, although conceived as a multifunction CLI tool, ended up being a single function CLI tool. It is useful for one thing, which is looking up a specific recipe and viewing its raw inputs required, intermediate products, as well as the machines required and the max potential power requirements.
 It can still help in planning by helping the player to plan the size of various sub-factories or floors in a larger building. This can prove useful as it can alleviate some trips to the Satisfactory wiki. 
+
+## How to Use
+This tool does not require any external modules and so can run with the standard Python 3.12+ install.
+
+Simply call the tool with the following syntax in order to receive the recipes requirements:
+```bash
+python3 ./source/sf_calc.py "reinforced iron plate"
+python3 ./source/sf_calc.py screw
+```
