@@ -45,7 +45,7 @@ def main():
         bd = BookData()  # BookData is only initialized if we need to list
         for recipe in bd.recipes:
             machine = bd.recipes[recipe]["machine"]
-            print("-{:15s} made in {:15s}".format(recipe, machine))
+            print("-{:23s} made in {:15s}".format(recipe, machine))
         del bd
 
     if args.count:
