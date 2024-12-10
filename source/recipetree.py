@@ -86,10 +86,14 @@ class RecipeTree:
 
         self.machines = processed_machines
 
+    def __calc_new_io_ratio(self, io_ratio: float, recipe_node: RecipeNode) -> float:
+        pass
+
     def __load_inputs(self):
         # for each IONode in the nodes inputs, create a RecipeNode and
         # add its inputs unless its "self"
         to_visit: list = self.root.inputs.copy()
+        io_ratio: float = 1
 
         while len(to_visit) > 0:
             curr_io_node: IONode = to_visit.pop()
@@ -99,6 +103,9 @@ class RecipeTree:
             curr_recipe_node: RecipeNode = RecipeNode(
                 curr_io_node.name, curr_io_node.qty
             )
+
+            # calculate io_ratio and then adjust curr_io_node with it
+            io_ratio = self.__calc_new_io_ratio(io_ratio, curr_recipe_node)
 
             if curr_recipe_node.type == "recipe":
                 self.inputs.append(curr_io_node)
@@ -111,7 +118,7 @@ class RecipeTree:
     def __load_outputs(self):
         self.outputs = self.root.outputs
 
-        # same as inputs but only for the outputs
+        # loads the recipe's outputs, not the recipe roots requested output
 
     def __load_machines_power_reqs(self):
         to_visit: list = self.root.inputs.copy()
