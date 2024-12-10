@@ -31,18 +31,6 @@ parser.add_argument(
 args = parser.parse_args()
 
 
-def __printf(print_dict: dict, cont: str = ""):
-    for key in print_dict:
-        if key is None:
-            continue
-        value = print_dict[key]
-
-        if type(value) is int:
-            print("> {:5d}".format(value), key, cont)
-        elif type(value) is float:
-            print("> {:5.1f}".format(value), key, cont)
-
-
 def main():
     # argv: list[str] = sys.argv
     argc: int = len(sys.argv)
@@ -65,11 +53,11 @@ def main():
         try:
             count = int(args.count)
         except ValueError:
-            print("Please supply an integer for count. Setting as 1.")
+            print("Please supply an integer for count.")
             count = 1
 
         if count <= 0:
-            print("Count provided needs to be at least 1. Setting as 1.")
+            print("Count provided needs to be at least 1.")
             count = 1
 
     else:  # count was not provided
@@ -80,45 +68,32 @@ def main():
         # NOTE: testing recipenode class
         rn = RecipeNode(args.recipe[0], count)
         rt = RecipeTree(rn)
-        print(rn)
-        print(rt)
 
-        if len(args.recipe) > 1:
-            print("Too many arguments provided for recipe.")
-        recipe = args.recipe[0].title()
-
-        if not args.count:  # count argument was not provided
-            bd = BookData()
-            count = bd.recipes[recipe]["out"][recipe]
-            del bd
-
-        if count > 1:
-            s = "s"
-        else:
-            s = ""
-        print(f"Calculating recipe for {count} {recipe}{s}.")
-
-        recipe_request: dict = {recipe: count}
-
-        search = Search()
-        search.set_requirements(recipe_request)
+        print(f"Calculating recipe for {count} {rn.name}s.")
 
         # Printing Request
         print("\nRequested Recipes:")
-        __printf(recipe_request, "per min")
+        print(rn.qty, rn.name, "per min")
 
         print("\nRaw Materials Needed:")
-        __printf(search.raw_materials, "per min")
+        raw_inputs: list = []
+        for ri in rt.raw_inputs:
+            raw_inputs.append(str(ri))
+        print(raw_inputs, "per min")
 
         print("\nIntermediate Materials to Produce:")
-        __printf(search.inter_materials, "per min")
+        inter_inputs: list = []
+        for ii in rt.inputs:
+            inter_inputs.append(str(ii))
+        print(inter_inputs, "per min")
 
         print("\nMachines Needed For Production:")
-        __printf(search.machines_needed)
+        machines: list = []
+        for mach in rt.machines:
+            machines.append(str(mach))
+        print(machines)
 
-        print(f"\nTotal Power Requirements: {search.power_mw_needed}MW")
-
-        del search
+        print(f"\nTotal Power Requirements: {rt.power_mw}MW")
 
 
 if __name__ == "__main__":
