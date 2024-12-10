@@ -23,9 +23,8 @@ It can still help in planning by helping the player to plan the size of various 
 This tool does not require any external modules and so can run with the standard Python 3.12+ install.
 
 Simply call the tool with the following syntax in order to receive the recipes requirements:
-```bash
+```
 python3 ./source/sf_calc.py "reinforced iron plate"
-Calculating recipe for 1 Reinforced Iron Plates.
 
 Requested Recipes:
 5 Reinforced Iron Plate per min
@@ -46,5 +45,24 @@ Machines Needed For Production:
 1.0 of Assembler
 
 Maximum Power Required: 45MW
+```
+```
 python3 ./source/sf_calc.py screw
+
+Requested Recipes:
+40 Screw per min
+
+Raw Materials Needed:
+30.0 of Iron Ore per min
+
+Intermediate Materials to Produce:
+10.0 of Iron Rod per min
+15.0 of Iron Ingot per min
+
+Machines Needed For Production:
+2.0 of Constructor per min
+1.0 of Smelter per min
+1.0 of Miner
+
+Maximum Power Required: 17MW
 ```
