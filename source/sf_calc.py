@@ -68,8 +68,6 @@ def main():
         rn = RecipeNode(args.recipe[0], count)
         rt = RecipeTree(rn)
 
-        print(f"Calculating recipe for {count} {rn.name}s.")
-
         # Printing Request
         print("\nRequested Recipes:")
         print(rn.qty, rn.name, "per min")
@@ -78,21 +76,24 @@ def main():
         raw_inputs: list = []
         for ri in rt.raw_inputs:
             raw_inputs.append(str(ri))
-        print(raw_inputs, "per min")
+        raw_inputs_s: str = " per min \n".join(raw_inputs)
+        print(raw_inputs_s, "per min")
 
         print("\nIntermediate Materials to Produce:")
         inter_inputs: list = []
         for ii in rt.inputs:
             inter_inputs.append(str(ii))
-        print(inter_inputs, "per min")
+        inter_inputs_s: str = " per min\n".join(inter_inputs)
+        print(inter_inputs_s, "per min")
 
         print("\nMachines Needed For Production:")
         machines: list = []
         for mach in rt.machines:
             machines.append(str(mach))
-        print(machines)
+        machines_s: str = " per min\n".join(machines)
+        print(machines_s)
 
-        print(f"\nTotal Power Requirements: {rt.power_mw}MW")
+        print(f"\nMaximum Power Required: {rt.power_mw}MW")
 
 
 if __name__ == "__main__":
