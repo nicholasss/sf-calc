@@ -1,7 +1,7 @@
 {
 	"recipes": {
 		"Iron Plate": {
-			"machine": "Assembler",
+			"machine": "Constructor",
 			"in": {
 				"Iron Ingot": 30
 			},
