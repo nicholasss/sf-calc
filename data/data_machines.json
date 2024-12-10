@@ -16,7 +16,7 @@
 			"conn_out": 1
 		},
 		"Miner": {
-			"power_mw": 6,
+			"power_mw": 5,
 			"conn_in": 0,
 			"conn_out": 1
 		},
