@@ -6,6 +6,7 @@ import sys
 import argparse
 
 from bookdata import BookData
+
 from search import Search
 from recipenode import RecipeNode, IONode
 from recipetree import RecipeTree
@@ -15,27 +16,22 @@ parser = argparse.ArgumentParser(description="Satisfactory Calculator CLI.")
 
 # parser arguments
 # default argument for what to calculate for
-parser.add_argument(
-    "recipe", help="What recipe to calculate",
-    nargs="*")
+parser.add_argument("recipe", help="What recipe to calculate", nargs="*")
 # '-c' optionally supplied for how many to calc
 parser.add_argument(
-    "-c", "--count", help="How many of a recipe to calculate",
-    metavar="recipe")
+    "-c", "--count", help="How many of a recipe to calculate", metavar="recipe"
+)
 # list will default to value of "all", if none specified
 parser.add_argument(
-    "-l", "--list", help="list all possible recipes",
-    nargs="?", const="all")
+    "-l", "--list", help="list all possible recipes", nargs="?", const="all"
+)
 # TODO: how to sort recipes for listing?
 
 # parsing args
 args = parser.parse_args()
 
 
-def __printf(print_dict: dict, cont: str = None):
-    if cont is None:
-        cont = ""
-
+def __printf(print_dict: dict, cont: str = ""):
     for key in print_dict:
         if key is None:
             continue
@@ -81,7 +77,6 @@ def main():
 
     # NOTE: Recipe Argument
     if args.recipe:
-
         # NOTE: testing recipenode class
         rn = RecipeNode(args.recipe[0], count)
         rt = RecipeTree(rn)
