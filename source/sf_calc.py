@@ -35,7 +35,9 @@ def main():
     argc: int = len(sys.argv)
 
     if argc <= 1:
-        print("Not enough arguments provided.")
+        print(
+            "Not enough arguments provided.\nStart with '--list' to see what you can choose from."
+        )
         return
 
     # print(f"\nProvided arguments are: {args}")
